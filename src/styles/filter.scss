@@ -1,0 +1,68 @@
+.form-container {
+  @extend %border-style;
+  // padding: 20px;
+  width: 232px;
+  height: auto;
+  cursor: pointer;
+}
+
+.checkbox {
+  width: 20px;
+  height: 20px;
+  display: none;
+}
+.filter-header {
+  padding: 20px;
+  margin: 0;
+  @extend %filter-font-header;
+}
+.labels {
+  @extend %filter-font-main;
+  display: inline-block;
+  position: relative;
+  vertical-align: middle;
+  margin: 5px;
+  cursor: pointer;
+}
+
+.checkbox + .labels:before {
+  content: '';
+  background: #ffffff;
+  border-radius: 2px;
+  border: 1px solid #2196f3;
+  display: inline-block;
+  vertical-align: middle;
+  width: 20px;
+  height: 20px;
+  padding: 2px;
+  margin-right: 10px;
+}
+.checkbox:checked + .labels:after {
+  content: '';
+  position: absolute;
+  top: 2px;
+  left: 10px;
+  margin-left: auto;
+  margin-right: auto;
+  padding: 3px;
+  width: 12;
+  height: 8px;
+  border: solid #2196f3;
+  border-width: 0 0.1em 0.1em 0;
+  transform: rotate(45deg);
+}
+
+.filters-container {
+  display: flex;
+  padding: 10px;
+  align-items: center;
+}
+.filters-container:hover {
+  background: #f1fcff;
+}
+.filters-container > input {
+  margin-right: 10px;
+}
+.form-container > input:first {
+  margin-top: 0;
+}

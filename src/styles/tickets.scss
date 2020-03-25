@@ -1,0 +1,51 @@
+.ticket {
+  grid-area: Ticket;
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  grid-template-rows: 66px 1fr 1fr;
+  grid-template-areas: 'header . avlogo' 'info info info' 'info info info';
+  padding: 20px;
+  padding-top: 0;
+  @extend %border-style;
+}
+.ticket h3 {
+  margin: 0;
+  @extend %tickets-font-main;
+}
+.ticket h1 {
+  height: 100%;
+  margin-top: 26px;
+  @extend %tickets-font-header;
+}
+.ticket span {
+  @extend %tickets-font-info;
+}
+.ticket img {
+  width: 110px;
+  height: auto;
+}
+.header {
+  grid-area: header;
+  align-self: end;
+}
+.av-logo {
+  grid-area: avlogo;
+  align-self: end;
+}
+.route {
+  grid-area: info;
+}
+.length {
+  grid-area: info;
+}
+.transfer {
+  grid-area: info;
+}
+
+.info {
+  grid-area: info;
+  display: grid;
+  grid-template-rows: 1fr 1fr;
+  grid-template-columns: 1fr 1fr 1fr;
+  grid-auto-flow: column;
+}

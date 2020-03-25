@@ -1,0 +1,43 @@
+.grid-container {
+  display: grid;
+  grid-template-columns: 1fr;
+  grid-template-rows: 160px 1fr;
+  grid-template-areas: 'Logo Logo' 'App App';
+  justify-items: center;
+  column-gap: 20px;
+}
+.app {
+  grid-area: App;
+  display: grid;
+  grid-template-columns: 1fr 2fr;
+  grid-template-areas: 'Filters Tickets';
+  column-gap: 20px;
+}
+.Logo {
+  grid-area: Logo;
+  margin: 50px;
+  align-self: center;
+  justify-self: center;
+}
+
+.Filters {
+  grid-area: Filters;
+  justify-self: end;
+}
+
+.tickets {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  grid-template-rows: 50px 1fr;
+  grid-template-areas: 'Tabs Tabs' 'Ticket Ticket';
+  width: 503px;
+
+  column-gap: 20px;
+  row-gap: 20px;
+  grid-area: Tickets;
+}
+
+.tabs {
+  grid-area: Tabs;
+  width: 502px;
+}
