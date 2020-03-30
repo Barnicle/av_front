@@ -1,4 +1,5 @@
-import { fetchPending, fetchTicketsSuccess, fetchError } from '../actions/actions.js';
+import { fetchPending, getTickets, fetchError } from '../actions/actions.js';
+import {fetchTicketsInitSuccess} from "../actions/actions";
 
 function fetchTickets(searchId) {
   return dispatch => {
@@ -9,11 +10,18 @@ function fetchTickets(searchId) {
         if (res.error) {
           throw res.error;
         }
-        dispatch(fetchTicketsSuccess(res.tickets));
-        return res.tickets;
+        if(res.stop === true){
+            dispatch(fetchTicketsInitSuccess(res.tickets, searchId));
+            dispatch(getTickets(res.tickets));
+            return res.tickets;
+        } else {
+            //dispatch(fetchTicketsInitSuccess(res.tickets, searchId));
+            dispatch(fetchTickets(searchId));
+        }
       })
       .catch(error => {
-        dispatch(fetchError(error));
+          dispatch(fetchTickets(searchId));
+          dispatch(fetchError(error));
       });
   };
 }

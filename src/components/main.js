@@ -3,41 +3,33 @@ import {bindActionCreators} from "redux";
 import { connect } from 'react-redux';
 import fetchId from '../reducer/fetchId';
 import fetchTickets from "../reducer/fetchTickets";
-import { getTicketsError, getTicketsPending, getIdSuccess, getTicketsSuccess } from '../reducer/tickets';
+import {tabsFilter} from '../reducer/TabsFilter';
+import { getTicketsError,  getTicketsPending, getIdSuccess,  getTicketsInitSuccess, getTicketsSuccess, getStopsFilter, getFilter } from '../reducer/tickets';
 import Ticket from './ticket';
 import Logo from '../images/Logo.svg';
 import Filter from './filter';
 import Tabs from './tabs';
 
-function mapsStateToProps(state) {
-  return {
+function mapsStateToProps(state) { return {
+    error: getTicketsError(state),
     pending: getTicketsPending(state),
     searchId: getIdSuccess(state),
+    ticketsInit: getTicketsInitSuccess(state),
     tickets: getTicketsSuccess(state),
-    error: getTicketsError(state)
+    filter: getFilter(state),
+    stops: getStopsFilter(state)
   };
 }
 
-const mapsDispatchToProps = dispatch => bindActionCreators({ fetchId, fetchTickets }, dispatch);
-
+const mapsDispatchToProps = dispatch => bindActionCreators({ fetchId, fetchTickets, tabsFilter}, dispatch);
 
 class Main extends Component {
-  componentDidMount(){
-    console.log(this.props);
-    // const {dispatch, fetchId, fetchTickets} = this.props;
-    //   dispatch(fetchId);
-      // dispatch(fetchTickets(this.props.searchId));
-  }
-
-  render() {
-      // this.props.tickets === undefined? console.log('there are no tickets') : console.log(this.props.tickets.slice(0, 5));
-
-      // const tickets = this.props.tickets.slice(0, 5);
-      // console.log(tickets);
+    render() {
+        const tickets = this.props.tickets;
       return (
       <div className="grid-container">
         <div className="Logo">
-          <a onClick={() => this.props.fetchTickets(this.props.searchId)}>
+          <a onClick={() => this.props.fetchId()}>
             <Logo />
           </a>
         </div>
@@ -46,8 +38,8 @@ class Main extends Component {
             <Filter />
           </div>
           <div className="tickets">
-            <Tabs />
-            {this.props.tickets === undefined?console.log('NO TICKETS FOR YOU'):<Ticket tickets={this.props.tickets}/>}
+            <Tabs tabsFilter={this.props.tabsFilter} ticketsInit={this.props.ticketsInit}/>
+            {tickets === null?undefined:Object.keys(tickets).map(key => <Ticket key={key} ticket={tickets[key]}/>)}
           </div>
         </div>
       </div>

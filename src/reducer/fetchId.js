@@ -1,4 +1,5 @@
 import { fetchPending, fetchSearchIdSuccess, fetchError } from '../actions/actions.js';
+import fetchTickets from "./fetchTickets";
 
 function fetchId() {
   return dispatch => {
@@ -9,12 +10,12 @@ function fetchId() {
         if (res.error) {
           throw res.error;
         }
+        const id = res.searchId;
         dispatch(fetchSearchIdSuccess(res.searchId));
-        console.log(res.searchId);
+        dispatch(fetchTickets(id));
         return res.searchId;
       })
       .catch(error => {
-
           dispatch(fetchError(error));
       });
   };
