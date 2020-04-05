@@ -1,9 +1,23 @@
+%active {
+  background-color: #2196f3;
+  border-color: #2196f3;
+  color: #fff;
+}
+
 .tabs-btn {
   height: 50px;
   width: 50%;
-  background-color: #ffffff;
   border: 1px solid #dfe5ec;
   @extend %tabs-font-style;
+}
+.tabs-btn:disabled{
+  cursor: not-allowed;
+}
+.tabs-btn-disabled{
+  background-color: #ffffff;
+}
+.tabs-btn-active {
+  @extend %active;
 }
 .tabs #fast {
   border-radius: 5px 0 0 5px;
@@ -13,9 +27,7 @@
   border-radius: 0 5px 5px 0;
   border-left: none;
 }
-
 .tabs-btn:hover {
-  background-color: #2196f3;
-  border-color: #2196f3;
-  color: #fff;
+  @extend %active;
 }
+

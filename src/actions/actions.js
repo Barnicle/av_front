@@ -25,32 +25,34 @@ export function fetchSearchIdSuccess(searchId) {
   };
 }
 
-export function FilterStops(stops) {
+export function FilterStops(stops, tickets) {
   return {
     type: FILTER_BY_STOPS,
-    stops
+    stops,
+    tickets
   }
 
 }
-export function getTabsFilter(tickets) {
+export function getTabsFilter(filter, tickets) {
   return {
     type: FILTER_BY_TABS,
+    filter,
     tickets
   }
 
 }
 
 export function  getTickets(tickets) {
+
   return {
     type: FETCH_TICKETS_SUCCESS,
-    tickets: tickets
+    tickets: tickets.slice(0, 5)
   }
 }
 
 export function  fetchTicketsInitSuccess(tickets) {
 return {
   type: FETCH_TICKETS_INIT_SUCCESS,
-  // searchId: searchId,
   tickets: tickets
 }
 }

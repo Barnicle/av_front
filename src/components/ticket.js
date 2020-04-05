@@ -19,6 +19,7 @@ class Ticket extends  Component{
         }
         return `${time[0] > 0?`${time[0]}д ${time[1]}ч ${time[2]}м` : `${time[1]}ч ${time[2]}м`} `;
     }
+
     getStops = (stops) => {
         if(stops.length == 0) return <h3>{`Без Пересадок`}</h3>
         else {

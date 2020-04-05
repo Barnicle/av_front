@@ -32,22 +32,22 @@ function tickets(state = [], action) {
     case FETCH_TICKETS_SUCCESS:
       return {
         ...state,
-        tickets: action.tickets.slice(0, 5)
+        tickets: action.tickets
       }
     case FILTER_BY_TABS:
-      console.log('FILTER BY TABS', action);
       return {
         ...state,
-        tickets: action.tickets
-        // ticketsInit: action.tickets
+        filter: action.filter,
+        ticketsInit: action.tickets
       }
     case FILTER_BY_STOPS:
-      console.log('FILTER BY STOPS');
-      return{
+      return {
         ...state,
-        // stops: action.stops,
-        // ticketsInit: action.tickets
+         stops: action.stops,
+         tickets: action.tickets
       }
+
+
     case FETCH_ERROR:
       return {
         ...state,
