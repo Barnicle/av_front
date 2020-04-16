@@ -1,7 +1,7 @@
-import { fetchPending, fetchSearchIdSuccess, fetchError } from '../actions/actions.js';
+import { fetchPending, fetchSearchIdSuccess, fetchError } from './actions.js';
 import fetchTickets from "./fetchTickets";
 
-function fetchId() {
+function fetchId(stops) {
   return dispatch => {
     dispatch(fetchPending());
     fetch(`https://front-test.beta.aviasales.ru/search`)
@@ -12,7 +12,7 @@ function fetchId() {
         }
         const id = res.searchId;
         dispatch(fetchSearchIdSuccess(res.searchId));
-        dispatch(fetchTickets(id));
+        dispatch(fetchTickets(id, stops));
         return res.searchId;
       })
       .catch(error => {

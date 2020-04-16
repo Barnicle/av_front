@@ -4,55 +4,60 @@ export const FETCH_ID_SUCCESS = 'FETCH_ID_SUCCESS';
 export const FETCH_TICKETS_INIT_SUCCESS = 'FETCH_TICKETS_INIT_SUCCESS';
 export const FETCH_TICKETS_SUCCESS = 'FETCH_TICKETS_SUCCESS';
 export const FILTER_BY_STOPS = 'FILTER_BY_STOPS';
-export const FILTER_BY_TABS = 'FILTER_BY_TABS'
+export const FILTER_BY_TABS = 'FILTER_BY_TABS';
+export const UPDATE_STOPS = 'UPDATE_STOPS';
+
 export function fetchPending() {
   return {
-    type: FETCH_PENDING
+    type: FETCH_PENDING,
   };
 }
 
 export function fetchError(error) {
   return {
     type: FETCH_ERROR,
-    error: error
+    error,
   };
 }
 
 export function fetchSearchIdSuccess(searchId) {
   return {
     type: FETCH_ID_SUCCESS,
-    searchId: searchId
+    searchId,
   };
 }
-
-export function FilterStops(stops, tickets) {
+export function updateStops(stops) {
+  console.log('updateStops');
+  return {
+    type: UPDATE_STOPS,
+    stops
+  };
+}
+export function filterStops(stops, tickets) {
   return {
     type: FILTER_BY_STOPS,
     stops,
-    tickets
-  }
-
+    tickets: tickets.slice(0, 5),
+  };
 }
 export function getTabsFilter(filter, tickets) {
   return {
     type: FILTER_BY_TABS,
     filter,
-    tickets
-  }
-
+    tickets,
+  };
 }
 
-export function  getTickets(tickets) {
-
+export function getTickets(tickets) {
   return {
     type: FETCH_TICKETS_SUCCESS,
     tickets: tickets.slice(0, 5)
-  }
+  };
 }
 
-export function  fetchTicketsInitSuccess(tickets) {
-return {
-  type: FETCH_TICKETS_INIT_SUCCESS,
-  tickets: tickets
-}
+export function fetchTicketsInitSuccess(tickets) {
+  return {
+    type: FETCH_TICKETS_INIT_SUCCESS,
+    tickets,
+  };
 }

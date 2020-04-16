@@ -1,20 +1,19 @@
-import { FilterStops } from '../actions/actions';
+import { updateStops, filterStops } from './actions.js';
 
-export const stopFilter = props => {
-  const { tickets, stops } = props;
-  const value = HandleFilters(stops);
-  console.log(value);
+export const updateStopsArr = (stops) => {
   return dispatch => {
-    if (stop === null) dispatch(FilterStops(stops, tickets));
-    const result = tickets.filter(el => {
-      return el.segments[0].stops.length <= stop && el.segments[1].stops.length <= stop;
-    });
-    console.log(result);
-    dispatch(FilterStops(stop, result));
+    dispatch(updateStops(stops));
   };
 };
 
-const HandleFilters = stops => {
-  const result = stops.reduce(el => el === true);
-  return result;
-};
+export const filterTickets = (stops, tickets)=>{
+return dispatch => {
+  console.log(stops);
+  if(stops.every(el => !el)) return dispatch(filterStops(stops, []));
+  let result = tickets.concat();
+for(let i =0; i < stops.length - 1; i++){
+  if(stops[i+1] === false) result = result.filter( el => el.segments[0].stops.length !== i && el.segments[1].stops.length !== i);
+}
+  return dispatch(filterStops(stops, result));
+}
+}

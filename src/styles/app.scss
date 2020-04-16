@@ -9,10 +9,15 @@
 .app {
   grid-area: App;
   display: grid;
+  grid-template-columns: 1fr;
+  grid-template-rows: auto;
+  grid-template-areas: 'Tickets';
+  column-gap: 20px;
+}
+.app__filters-show{
   grid-template-columns: 1fr 2fr;
   grid-template-rows: auto auto;
-  grid-template-areas: 'Filters Tickets';
-  column-gap: 20px;
+  grid-template-areas: ' Filters Tickets';
 }
 .Logo {
   grid-area: Logo;
@@ -22,8 +27,12 @@
 }
 
 .Filters {
+  display: block;
   grid-area: Filters;
   justify-self: end;
+}
+.Filters__disabled{
+  display: none;
 }
 
 .tickets {

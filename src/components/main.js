@@ -4,7 +4,7 @@ import { connect } from 'react-redux';
 import fetchId from '../actions/fetchId';
 import fetchTickets from '../actions/fetchTickets';
 import { tabsFilter } from '../actions/TabsFilter';
-import { stopFilter } from '../actions/StopFilter';
+import { updateStopsArr, filterTickets } from '../actions/StopFilter';
 import {
   getTicketsError,
   getTicketsPending,
@@ -32,24 +32,33 @@ function mapsStateToProps(state) {
 }
 
 const mapsDispatchToProps = dispatch =>
-  bindActionCreators({ fetchId, fetchTickets, tabsFilter, stopFilter }, dispatch);
+  bindActionCreators({ fetchId, fetchTickets, tabsFilter, updateStopsArr, filterTickets }, dispatch);
 
 class Main extends Component {
+  displayFilters = ()=>{
+    const divElement = document.querySelector('.app');
+    divElement.classList.add('app__filters-show');
+    const filters = document.querySelector('.Filters');
+    filters.classList.remove('Filters__disabled');
+    console.log(filters.classList);
+
+  }
   render() {
-    const tickets = this.props.tickets;
+    const {tickets, stops, ticketsInit} = this.props;
+    if(tickets) this.displayFilters();
     return (
       <div className="grid-container">
         <div className="Logo">
-          <a onClick={() => this.props.fetchId()}>
+          <a onClick={() => this.props.fetchId(stops)}>
             <Logo />
           </a>
         </div>
         <div className="app">
-          <div className="Filters">
+          <div className="Filters Filters__disabled">
             <Filter {...this.props} />
           </div>
           <div className="tickets">
-            <Tabs tabsFilter={this.props.tabsFilter} tickets={this.props.ticketsInit}  />
+            <Tabs tabsFilter={this.props.tabsFilter} tickets={ticketsInit}  />
             {tickets === null
               ? undefined
               : Object.keys(tickets).map(key => <Ticket key={key} ticket={tickets[key]} />)}

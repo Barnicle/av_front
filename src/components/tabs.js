@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-import tickets from "../reducer";
 
 class Tabs extends Component {
   handleTabs =  (e) => {
@@ -7,9 +6,11 @@ class Tabs extends Component {
         let btn;
        target.id === 'fast' ? btn = document.querySelector('#cheap') : btn = document.querySelector('#fast');
        if(this.isActive(btn))this.toogleBtn(btn);
-       this.props.tabsFilter(target.id, this.props.tickets)
        this.toogleBtn(target);
+       this.isActive(target)? this.props.tabsFilter(target.id, this.props.tickets): this.props.tabsFilter('none', this.props.tickets);
+
   }
+
   tickets = ()=> {
       return  new Promise( resolve => {
           if(this.props.tickets !=null) {
@@ -34,7 +35,12 @@ class Tabs extends Component {
       const promise = this.tickets();
     return (
       <div className="tabs">
-        <button className="tabs-btn tabs-btn-disabled" id="fast" disabled={this.props.tickets?false: true} onClick={event => this.handleTabs(event)}>
+        <button
+            className="tabs-btn tabs-btn-disabled"
+            id="fast"
+            disabled={this.props.tickets?false: true}
+            onClick={event => this.handleTabs(event)}
+        >
           Самый быстрый
         </button>
         <button

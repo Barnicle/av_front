@@ -4,20 +4,19 @@ export const tabsFilter = (tabs, tickets) => {
   let array = tickets.slice();
 
     return dispatch => {
-    if(tabs === 'cheap')
-        {
-          array
-          .sort((a, b) => {
-            return a.price - b.price;
-          })
+      switch (tabs) {
+            case 'fast':
+                array.sort((a, b) => {
+                        return ((a.segments[0].duration + a.segments[1].duration) -
+                            (b.segments[0].duration + b.segments[1].duration));
+                    });
+                break;
+            case 'cheap':
+               array.sort((a, b) =>  a.price - b.price);
+                break;
+          default: //do nothing
+
         }
-      if(tabs === 'fast') {
-          array
-          .sort((a, b) => {
-              return ((a.segments.duration + a.segments.duration) -
-                  (b.segments.duration + b.segments.duration));
-          })
-}
         dispatch(getTabsFilter(tabs, tickets));
         dispatch(getTickets(array));
   }
